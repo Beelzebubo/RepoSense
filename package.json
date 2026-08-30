@@ -1,0 +1,42 @@
+{ 
+    "name": "reposense",
+    "private": true,
+    "version": "0.1.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc -b && vite build",
+        "lint": "oxlint",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "@fontsource-variable/geist": "^5.3.0",
+        "@fontsource-variable/inter": "^5.3.0",
+        "@fontsource-variable/jetbrains-mono": "^5.3.0",
+        "@fontsource-variable/outfit": "^5.3.0",
+        "@fontcource-variable/space-grotesk": "^5.3.0",
+        "@fontcource/ibm-plex-mono": "^5.3.0",
+        "fontsource/playfair-display": "^5.3.0",
+        "@fontsource/space-mono": "^5.3.0",
+        "@huggingface/transformers": "^4.2.0",
+        "@phosphor-icons/react": "^2.1.10",
+        "fflate":"^0.8.3",
+        "motion":"^13.1.1",
+        "react":"^19.2.8",
+        "react-dom": "^19.2.8",
+        "react-markdown": "^10.1.0",
+        "rehype-highlight":"^7.0.2",
+        "remark-gfm": "^4.0.1"
+    },
+    "devDependencies": {
+        "@tailwindcss/vite": "^4.3.3",
+        "@types/node": "^24.13.3",
+        "@types/react": "^19.2.18",
+        "@types/react-dom": "^19.2.4",
+        "@vitejs/plugin-react": "^6.1.0",
+        "oxlint": "^1.79.0",
+        "tailwindcss": "^4.3.3",
+        "typescript": "~6.0.2",
+        "vite": "^8.2.2"
+    }
+}
