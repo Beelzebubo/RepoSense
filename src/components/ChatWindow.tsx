@@ -92,7 +92,7 @@ export function ChatWindow({ onOpenSettings, className }: Props) {
   const hasKey = !!loadByok()?.apiKey;
 
   return (
-    <div className={`flex flex-1 min-w-0 flex-col overflow-hidden bg-bg-canvas${className ? ` ${className}` : ''}`}>
+    <div className={`flex min-w-0 flex-col overflow-hidden bg-bg-canvas${className ? ` ${className}` : ''}`}>
       <div ref={scrollRef} className="flex-1 overflow-y-auto overflow-x-hidden px-4 py-6">
         {messages.length === 0 && (
           <motion.div
