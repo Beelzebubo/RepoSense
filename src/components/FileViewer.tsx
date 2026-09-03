@@ -23,7 +23,7 @@ export function FileViewer() {
       animate={{ x: 0, opacity: 1 }}
       exit={{ x: '100%', opacity: 0 }}
       transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-      className="flex h-full w-[45%] min-w-[400px] max-w-[600px] flex-col border-l border-border bg-bg-surface"
+      className="flex h-full w-[420px] shrink-0 flex-col border-l border-border bg-bg-surface"
     >
       <div className="flex items-center justify-between border-b border-border px-4 py-3">
         <span className="font-mono text-body-sm text-text-primary truncate max-w-[250px]">{activeFile}</span>
