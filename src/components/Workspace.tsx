@@ -1,5 +1,4 @@
 import { motion } from 'motion/react';
-import { useAppState } from '../core/state/store';
 import { FileTree } from './FileTree';
 import { ChatWindow } from './ChatWindow';
 import { FileViewer } from './FileViewer';
@@ -11,8 +10,6 @@ interface Props {
 }
 
 export function Workspace({ onOpenSettings }: Props) {
-  const { activeFile } = useAppState();
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
