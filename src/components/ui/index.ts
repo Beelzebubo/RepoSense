@@ -1,0 +1,1 @@
+export { StrataMark, type StrataMarkName } from './StrataMark';

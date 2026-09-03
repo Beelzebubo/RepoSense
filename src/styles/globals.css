@@ -1,0 +1,247 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/outfit/wght.css';
+@import '@fontsource-variable/jetbrains-mono/wght.css';
+@import '@fontsource/playfair-display/400.css';
+@import '@fontsource/playfair-display/600.css';
+@import '@fontsource/playfair-display/700.css';
+
+@theme {
+  --color-bg-canvas: #FDE8EE;
+  --color-bg-surface: #FFFFFF;
+  --color-bg-raised: #FFF5F8;
+  --color-bg-hover: #FFF0F3;
+  --color-bg-code: #F9F0F5;
+  --color-bg-input: #FFFFFF;
+  --color-bg-input-focus: #FFF5F8;
+
+  --color-accent: #E879A0;
+  --color-accent-dim: #D4608A;
+  --color-accent-bright: #F5A0C0;
+  --color-accent-muted: #F0C0D4;
+  --color-accent-ghost: rgba(232, 121, 160, 0.08);
+
+  --color-text-primary: #2D2235;
+  --color-text-secondary: #6B5B7B;
+  --color-text-tertiary: #9B8BA8;
+  --color-text-inverse: #FFFFFF;
+  --color-text-code: #8B5A8A;
+
+  --color-success: #7BC88A;
+  --color-warning: #E8A84C;
+  --color-error: #E06070;
+  --color-info: #7AABD0;
+
+  --color-border: #F0D8E4;
+  --color-border-focus: #E879A0;
+  --color-border-subtle: #F5E8F0;
+
+  --font-display: 'Playfair Display', 'Georgia', serif;
+  --font-ui: 'Outfit Variable', 'Outfit', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', monospace;
+  --font-mono-ui: 'Outfit Variable', 'Outfit', system-ui, sans-serif;
+
+  --text-display: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+  --text-h1: clamp(1.75rem, 3vw + 0.5rem, 2.75rem);
+  --text-h2: clamp(1.25rem, 2vw + 0.25rem, 1.75rem);
+  --text-h3: 1.125rem;
+  --text-body: 1rem;
+  --text-body-sm: 0.875rem;
+  --text-caption: 0.75rem;
+  --text-mono: 0.8125rem;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 4px rgba(180, 120, 150, 0.08);
+  --shadow-md: 0 4px 16px rgba(180, 120, 150, 0.1);
+  --shadow-lg: 0 8px 32px rgba(180, 120, 150, 0.12);
+  --shadow-glow: 0 0 20px rgba(232, 121, 160, 0.15);
+  --shadow-spotlight: 0 0 0 2px rgba(232, 121, 160, 0.3), 0 0 20px rgba(232, 121, 160, 0.15);
+}
+
+/* Dark mode tokens */
+[data-theme="dark"] {
+  --color-bg-canvas: #1A1230;
+  --color-bg-surface: #231A3A;
+  --color-bg-raised: #2C2048;
+  --color-bg-hover: #352850;
+  --color-bg-code: #1E1535;
+  --color-bg-input: #231A3A;
+  --color-bg-input-focus: #2C2048;
+
+  --color-accent: #F0A0C0;
+  --color-accent-dim: #D888A8;
+  --color-accent-bright: #F8C0D8;
+  --color-accent-muted: #4A3058;
+  --color-accent-ghost: rgba(240, 160, 192, 0.1);
+
+  --color-text-primary: #E8E0F0;
+  --color-text-secondary: #A898B8;
+  --color-text-tertiary: #9888A8;
+  --color-text-inverse: #1A1230;
+  --color-text-code: #D0A0D0;
+
+  --color-border: #3A2850;
+  --color-border-focus: #F0A0C0;
+  --color-border-subtle: #2C2048;
+
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 20px rgba(240, 160, 192, 0.15);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+@layer base {
+  body {
+    margin: 0;
+    background: var(--color-bg-canvas);
+    color: var(--color-text-primary);
+    font-family: var(--font-ui);
+    font-size: var(--text-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--color-border);
+    border-radius: 3px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-text-tertiary);
+  }
+
+  ::selection {
+    background: rgba(232, 121, 160, 0.2);
+    color: var(--color-text-primary);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-ui {
+    font-family: var(--font-ui);
+  }
+
+  .font-mono-ui {
+    font-family: var(--font-mono);
+  }
+
+  .sediment-reveal {
+    animation: sediment-up 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  @keyframes sediment-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .sediment-stagger > * {
+    animation: sediment-up 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+
+  .sediment-stagger > *:nth-child(1) { animation-delay: 0ms; }
+  .sediment-stagger > *:nth-child(2) { animation-delay: 60ms; }
+  .sediment-stagger > *:nth-child(3) { animation-delay: 120ms; }
+  .sediment-stagger > *:nth-child(4) { animation-delay: 180ms; }
+  .sediment-stagger > *:nth-child(5) { animation-delay: 240ms; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(3deg); }
+  }
+
+  @keyframes petal-fall {
+    0% {
+      transform: translateY(-10vh) translateX(0) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.7;
+    }
+    90% {
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateY(100vh) translateX(80px) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes dot-drift {
+    0%, 100% {
+      transform: translate(0, 0);
+      opacity: 0.3;
+    }
+    25% {
+      transform: translate(10px, -8px);
+      opacity: 0.5;
+    }
+    50% {
+      transform: translate(-5px, -15px);
+      opacity: 0.3;
+    }
+    75% {
+      transform: translate(-10px, -5px);
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.05); }
+  }
+}

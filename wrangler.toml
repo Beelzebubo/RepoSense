@@ -1,0 +1,6 @@
+name = "reposense-cors-proxy"
+main = "worker/cors-proxy.js"
+compatibility_date = "2025-01-01"
+
+[observability]
+enabled = true
