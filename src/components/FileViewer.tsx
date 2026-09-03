@@ -23,7 +23,7 @@ export function FileViewer() {
       animate={{ x: 0, opacity: 1 }}
       exit={{ x: '100%', opacity: 0 }}
       transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-      className="flex h-full w-[480px] min-w-0 flex-col border-l border-border bg-bg-surface"
+      className="flex h-full w-[45%] min-w-[400px] max-w-[600px] flex-col border-l border-border bg-bg-surface"
     >
       <div className="flex items-center justify-between border-b border-border px-4 py-3">
         <span className="font-mono text-body-sm text-text-primary truncate max-w-[250px]">{activeFile}</span>
@@ -43,9 +43,9 @@ export function FileViewer() {
           </button>
         </div>
       </div>
-      <div className="flex-1 overflow-y-auto p-4">
+      <div className="flex-1 overflow-auto p-4">
         {content ? (
-          <pre className="font-mono text-mono text-text-primary overflow-x-auto">
+          <pre className="font-mono text-mono text-text-primary whitespace-pre">
             {content.split('\n').map((line, i) => (
               <div
                 key={i}

@@ -109,3 +109,34 @@ export async function loadIndex(
 
   return { chunks, vectors: repoData.vectors, dim: repoData.dim, files: repoData.files ?? [], fileContents: repoData.fileContents ?? {} }
 }
+
+export async function saveChunksOnly(
+  url: string,
+  chunks: Chunk[],
+  files: FileEntry[],
+  fileContents: Record<string, string>,
+): Promise<void> {
+  const db = await openDb()
+  const id = repoId(url)
+  const chunkIds = chunks.map(c => c.id)
+
+  const tx = db.transaction(['repos', 'chunks'], 'readwrite')
+  tx.objectStore('repos').put({
+    repoId: id,
+    vectors: new Float32Array(0),
+    dim: 0,
+    chunkIds,
+    files,
+    indexedAt: Date.now(),
+    fileContents,
+  } satisfies StoredRepo)
+
+  for (const chunk of chunks) {
+    tx.objectStore('chunks').put({ id: chunk.id, repoId: id, chunk } satisfies StoredChunk)
+  }
+
+  return new Promise((resolve, reject) => {
+    tx.oncomplete = () => resolve()
+    tx.onerror = () => reject(tx.error)
+  })
+}

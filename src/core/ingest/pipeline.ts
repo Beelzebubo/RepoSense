@@ -4,7 +4,7 @@ import { chunkFile } from '../chunk/chunker'
 import { buildManifest } from './treeWalk'
 import { codeloadUrl } from './githubFetch'
 import { unzipRepo } from './unzip'
-import { loadIndex, repoId } from '../index/idb'
+import { saveChunksOnly, loadIndex, repoId } from '../index/idb'
 import { setEngine } from '../chat/engine'
 
 export async function ingest(ref: RepoRef): Promise<{ repo: Repo; chunks: Chunk[] }> {
@@ -72,6 +72,7 @@ export async function ingest(ref: RepoRef): Promise<{ repo: Repo; chunks: Chunk[
     dim: 0,
   })
 
+  await saveChunksOnly(url, allChunks, manifest, fileContents)
   embedInBackground(url)
 
   return { repo, chunks: allChunks }
