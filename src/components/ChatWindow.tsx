@@ -8,9 +8,10 @@ import { loadByok } from '../core/llm/byok';
 
 interface Props {
   onOpenSettings: () => void;
+  className?: string;
 }
 
-export function ChatWindow({ onOpenSettings }: Props) {
+export function ChatWindow({ onOpenSettings, className }: Props) {
   const { messages } = useAppState();
   const [input, setInput] = useState('');
   const [streaming, setStreaming] = useState(false);
@@ -91,14 +92,14 @@ export function ChatWindow({ onOpenSettings }: Props) {
   const hasKey = !!loadByok()?.apiKey;
 
   return (
-    <div className="flex flex-1 min-w-0 flex-col overflow-hidden bg-bg-canvas">
+    <div className={`flex flex-1 min-w-0 flex-col overflow-hidden bg-bg-canvas${className ? ` ${className}` : ''}`}>
       <div ref={scrollRef} className="flex-1 overflow-y-auto overflow-x-hidden px-4 py-6">
         {messages.length === 0 && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.2 }}
-            className="flex h-full items-center justify-center"
+            className="flex h-full items-start justify-center pt-16"
           >
             <div className="text-center max-w-md">
               <p className="text-h3 font-semibold text-text-primary mb-2">

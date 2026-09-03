@@ -41,7 +41,7 @@ export function Workspace({ onOpenSettings }: Props) {
           </div>
         </aside>
 
-        <ChatWindow onOpenSettings={onOpenSettings} />
+        <ChatWindow onOpenSettings={onOpenSettings} className="w-[640px] shrink-0" />
         {activeFile && <FileViewer />}
       </div>
     </motion.div>
