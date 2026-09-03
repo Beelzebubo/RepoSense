@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
 import { useAppState, setState } from '../core/state/store';
 
 export function FileViewer() {
@@ -18,13 +17,7 @@ export function FileViewer() {
   if (!activeFile) return null;
 
   return (
-    <motion.div
-      initial={{ x: '100%', opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      exit={{ x: '100%', opacity: 0 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-      className="flex h-full flex-1 min-w-0 flex-col border-l border-border bg-bg-surface"
-    >
+    <div className="flex h-full w-[420px] shrink-0 flex-col border-l border-border bg-bg-surface">
       <div className="flex items-center justify-between border-b border-border px-4 py-3">
         <span className="font-mono text-body-sm text-text-primary truncate max-w-[250px]">{activeFile}</span>
         <div className="flex items-center gap-2">
@@ -68,6 +61,6 @@ export function FileViewer() {
           </p>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }
