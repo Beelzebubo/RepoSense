@@ -42,7 +42,7 @@ export function Workspace({ onOpenSettings }: Props) {
         </aside>
 
         <div className="flex flex-1 overflow-hidden min-w-0">
-          <ChatWindow onOpenSettings={onOpenSettings} />
+          <ChatWindow onOpenSettings={onOpenSettings} className="max-w-[640px] shrink-0" />
           {activeFile && <FileViewer />}
         </div>
       </div>
