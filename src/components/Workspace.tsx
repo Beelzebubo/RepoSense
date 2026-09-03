@@ -1,7 +1,6 @@
 import { motion } from 'motion/react';
 import { FileTree } from './FileTree';
 import { ChatWindow } from './ChatWindow';
-import { FileViewer } from './FileViewer';
 import { IndexProgress } from './IndexProgress';
 import { FloatingDots } from './FloatingDots';
 
@@ -39,7 +38,6 @@ export function Workspace({ onOpenSettings }: Props) {
         </aside>
 
         <ChatWindow onOpenSettings={onOpenSettings} />
-        <FileViewer />
       </div>
     </motion.div>
   );
