@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { useAppState, setState } from '../core/state/store';
+import { useAppState, setState, getState } from '../core/state/store';
 import type { ChatMessage, Citation } from '../core/types';
 import { ask, retrieveForQuery } from '../core/chat/engine';
 import { MessageBubble } from './MessageBubble';
@@ -33,6 +33,18 @@ export function ChatWindow({ onOpenSettings }: Props) {
 
     setInput('');
     const userMsg: ChatMessage = { id: crypto.randomUUID(), role: 'user', content: q };
+
+    const { ingestion } = getState();
+    if (ingestion.stage !== 'done') {
+      const waitMsg: ChatMessage = {
+        id: crypto.randomUUID(),
+        role: 'assistant',
+        content: 'Still indexing the codebase... try again in a moment.',
+      };
+      setState({ messages: [...messages, userMsg, waitMsg] });
+      return;
+    }
+
     setState({ messages: [...messages, userMsg] });
     setStreaming(true);
 
@@ -80,7 +92,7 @@ export function ChatWindow({ onOpenSettings }: Props) {
 
   return (
     <div className="flex flex-1 flex-col overflow-hidden bg-bg-canvas">
-      <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-6">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto overflow-x-hidden px-4 py-6">
         {messages.length === 0 && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}

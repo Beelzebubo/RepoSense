@@ -60,7 +60,7 @@ export async function ingest(ref: RepoRef): Promise<{ repo: Repo; chunks: Chunk[
 
   setState({
     repo,
-    ingestion: { stage: 'done', progress: 100 },
+    ingestion: { stage: 'embed', progress: 0, message: 'Queued for embedding...' },
     messages: [],
     fileContents,
   })

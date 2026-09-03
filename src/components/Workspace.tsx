@@ -41,7 +41,7 @@ export function Workspace({ onOpenSettings }: Props) {
           </div>
         </aside>
 
-        <div className="flex flex-1 overflow-hidden">
+        <div className="flex flex-1 overflow-hidden min-w-0">
           <ChatWindow onOpenSettings={onOpenSettings} />
           {activeFile && <FileViewer />}
         </div>
