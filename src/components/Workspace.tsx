@@ -1,8 +1,5 @@
-import { motion } from 'motion/react';
 import { FileTree } from './FileTree';
 import { ChatWindow } from './ChatWindow';
-import { IndexProgress } from './IndexProgress';
-import { FloatingDots } from './FloatingDots';
 
 interface Props {
   onOpenSettings: () => void;
@@ -10,14 +7,7 @@ interface Props {
 
 export function Workspace({ onOpenSettings }: Props) {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.4 }}
-      className="flex h-full flex-col overflow-hidden"
-    >
-      <FloatingDots count={8} />
-      <IndexProgress />
+    <div className="flex h-full flex-col overflow-hidden">
       <div className="flex flex-1 overflow-hidden">
         <aside className="flex w-64 shrink-0 flex-col border-r border-border bg-bg-surface">
           <div className="flex items-center justify-between border-b border-border px-4 py-3">
@@ -39,6 +29,6 @@ export function Workspace({ onOpenSettings }: Props) {
 
         <ChatWindow onOpenSettings={onOpenSettings} />
       </div>
-    </motion.div>
+    </div>
   );
 }

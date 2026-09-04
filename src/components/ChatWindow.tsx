@@ -32,6 +32,7 @@ export function ChatWindow({ onOpenSettings }: Props) {
     }
 
     setInput('');
+    console.log('[RepoSense] sending:', q);
     const userMsg: ChatMessage = { id: crypto.randomUUID(), role: 'user', content: q };
 
     const { ingestion } = getState();

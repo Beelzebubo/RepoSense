@@ -4,7 +4,6 @@ import { parseRepoUrl } from '../core/ingest/githubFetch';
 import { ingest } from '../core/ingest/pipeline';
 import { setState } from '../core/state/store';
 import { CherryBlossomTree } from './CherryBlossomTree';
-import { FloatingDots } from './FloatingDots';
 
 interface Props {
   onOpenSettings: () => void;
@@ -17,6 +16,7 @@ export function LandingHero({ onOpenSettings }: Props) {
 
   async function submit(e: FormEvent) {
     e.preventDefault();
+    console.log('[RepoSense] submitting url:', url);
     const ref = parseRepoUrl(url);
     if (!ref) {
       setError('Please enter a valid GitHub repo URL');
@@ -37,7 +37,6 @@ export function LandingHero({ onOpenSettings }: Props) {
 
   return (
     <section className="relative flex h-full flex-col items-center justify-center overflow-hidden px-6">
-      <FloatingDots count={15} />
       <div className="pointer-events-none absolute right-0 bottom-0 z-0 opacity-50 hidden md:block">
         <CherryBlossomTree className="h-[550px] w-[380px]" />
       </div>

@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import { motion } from 'motion/react';
 import { useAppState, setState } from '../core/state/store';
 import type { FileEntry } from '../core/types';
 
@@ -28,7 +27,7 @@ export function FileTree() {
   }
 
   return (
-    <nav className="flex flex-col gap-0.5 overflow-y-auto" aria-label="Repository files">
+    <nav className="flex flex-col gap-0.5 overflow-y-auto">
       <div className="mb-2 flex items-center gap-2 px-3 text-caption text-text-secondary border-b border-border-subtle pb-2">
         <span className="font-mono font-medium text-text-primary text-xs">{repo.ref.owner}/{repo.ref.name}</span>
         <span className="text-text-tertiary">&middot; {repo.fileCount} files</span>
@@ -70,22 +69,17 @@ function TreeNode({ node, depth, expanded, activeFile, onToggle, onSelect }: Tre
           style={{ paddingLeft: pl }}
           onClick={() => onToggle(node.path)}
         >
-          <motion.span
-            className="text-text-tertiary text-xs"
-            animate={{ rotate: isExpanded ? 90 : 0 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+          <span
+            className="text-text-tertiary text-xs transition-transform"
+            style={{ display: 'inline-block', transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)' }}
           >
             &#9654;
-          </motion.span>
+          </span>
           <FolderIcon open={isExpanded} />
           <span className="truncate font-medium text-text-primary">{node.name}</span>
         </button>
         {isExpanded && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            transition={{ duration: 0.2, ease: 'easeOut' }}
-          >
+          <div className="overflow-hidden">
             {node.children!.map((child) => (
               <TreeNode
                 key={child.name}
@@ -97,7 +91,7 @@ function TreeNode({ node, depth, expanded, activeFile, onToggle, onSelect }: Tre
                 onSelect={onSelect}
               />
             ))}
-          </motion.div>
+          </div>
         )}
       </div>
     );

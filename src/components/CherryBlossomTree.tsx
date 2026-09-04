@@ -3,7 +3,6 @@ export function CherryBlossomTree({ className = '' }: { className?: string }) {
     <svg
       viewBox="0 0 400 500"
       className={className}
-      aria-hidden="true"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
