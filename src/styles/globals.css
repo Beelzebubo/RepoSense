@@ -5,6 +5,7 @@
 @import '@fontsource/playfair-display/600.css';
 @import '@fontsource/playfair-display/700.css';
 
+/* color palette inspo: https://www.figma.com/community/file/sakura-dashboard */
 @theme {
   --color-bg-canvas: #FDE8EE;
   --color-bg-surface: #FFFFFF;

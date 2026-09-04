@@ -1,7 +1,7 @@
 import type { Chunk, FileEntry } from '../types'
 
 const DB_NAME = 'reposense'
-const DB_VERSION = 2
+const DB_VERSION = 2 // FIXME: bump this if you change StoredRepo or StoredChunk
 
 interface StoredRepo {
   repoId: string
@@ -38,6 +38,7 @@ function openDb(): Promise<IDBDatabase> {
 }
 
 export function repoId(url: string): string {
+  // simple hash so we get a short unique id for each repo
   let h = 0
   for (const c of url) h = (h ^ c.charCodeAt(0)) >>> 0
   return h.toString(36)

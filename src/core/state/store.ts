@@ -32,6 +32,7 @@ export function getState(): State {
 }
 
 export function setState(patch: Partial<State> | ((s: State) => Partial<State>)) {
+  // console.log('[store] setState', typeof patch === 'function' ? 'fn' : Object.keys(patch))
   emit(typeof patch === 'function' ? { ...state, ...patch(state) } : { ...state, ...patch })
 }
 

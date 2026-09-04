@@ -9,6 +9,7 @@ import { setEngine } from '../chat/engine'
 
 export async function ingest(ref: RepoRef): Promise<{ repo: Repo; chunks: Chunk[] }> {
   const url = ref.url
+  console.log('[RepoSense] starting ingest for', url)
 
   const cached = await loadIndex(url)
   if (cached) {
@@ -36,9 +37,10 @@ export async function ingest(ref: RepoRef): Promise<{ repo: Repo; chunks: Chunk[
 
   setState({ ingestion: { stage: 'fetch', progress: 0, message: 'Fetching repo archive…' } })
   const archiveUrl = codeloadUrl(ref)
-  const response = await fetch(archiveUrl)
-  if (!response.ok) throw new Error(`Failed to fetch repo (${response.status})`)
-  const buf = await response.arrayBuffer()
+  console.log('[RepoSense] fetching archive from', archiveUrl)
+  const resp = await fetch(archiveUrl)
+  if (!resp.ok) throw new Error(`Failed to fetch repo (${resp.status})`)
+  const buf = await resp.arrayBuffer()
   const zip = new Uint8Array(buf)
 
   setState({ ingestion: { stage: 'fetch', progress: 100, message: 'Unzipping…' } })
@@ -46,9 +48,11 @@ export async function ingest(ref: RepoRef): Promise<{ repo: Repo; chunks: Chunk[
 
   setState({ ingestion: { stage: 'chunk', progress: 0, message: 'Building manifest…' } })
   const manifest = buildManifest(files)
+  // console.log('manifest:', manifest.length, 'files')
 
   setState({ ingestion: { stage: 'chunk', progress: 20, message: 'Chunking files…' } })
   const { chunks: allChunks, fileContents } = chunkManifest(manifest, files)
+  console.log('[RepoSense] chunked', allChunks.length, 'chunks from', manifest.length, 'files')
 
   const repo: Repo = {
     ref,
@@ -87,7 +91,7 @@ function embedInBackground(url: string) {
   worker.postMessage({ type: 'embed', repoUrl: url })
 
   worker.onmessage = (e: MessageEvent) => {
-    const { type, progress, message } = e.data
+    const { type, progress, message } = e.data as any
 
     if (type === 'progress') {
       setState({ ingestion: { stage: 'embed', progress, message } })
@@ -131,6 +135,7 @@ function chunkManifest(manifest: FileEntry[], files: Map<string, Uint8Array>): {
     fileContents[entry.path] = text
     chunks.push(...chunkFile(repoId(entry.path), entry.path, text))
     processed++
+    // update progress every 20 files so it doesnt spam state updates
     if (processed % 20 === 0 || processed === manifest.length) {
       const pct = Math.round((processed / manifest.length) * 80) + 20
       setState({ ingestion: { stage: 'chunk', progress: pct, message: `Chunking ${processed}/${manifest.length}…` } })
@@ -139,10 +144,12 @@ function chunkManifest(manifest: FileEntry[], files: Map<string, Uint8Array>): {
   return { chunks, fileContents }
 }
 
+// this strips the leading folder name from the zip entry (e.g. "repo-main/src/App.tsx" -> "src/App.tsx")
+// took me a while to figure out why paths werent matching lol
 function findRawPath(relative: string, files: Map<string, Uint8Array>): string | null {
-  for (const key of files.keys()) {
-    const stripped = key.replace(/^[^/]+\//, '')
-    if (stripped === relative) return key
+  for (const k of files.keys()) {
+    const stripped = k.replace(/^[^/]+\//, '')
+    if (stripped === relative) return k
   }
   return null
 }

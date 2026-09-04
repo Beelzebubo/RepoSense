@@ -3,12 +3,13 @@ import type { IngestionStage } from '../core/types';
 
 const LABELS: Record<IngestionStage, string> = {
   idle: 'Paste a repo URL to get started',
-  fetch: 'Fetching repository...',
+  fetch: 'Fetching repo...',
   chunk: 'Indexing files...',
   embed: 'Building embeddings...',
   index: 'Finalizing index...',
   done: 'Ready to chat!',
   error: 'Something went wrong',
+  // idle: 'Waiting...',
 };
 
 interface Props {

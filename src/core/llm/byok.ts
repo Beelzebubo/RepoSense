@@ -43,6 +43,7 @@ export async function* streamByok(
   config: ByokConfig,
   messages: { role: string; content: string }[],
 ): AsyncGenerator<string> {
+  // TODO: add retry logic for rate limits
   const resp = await fetch(`${config.baseUrl}/chat/completions`, {
     method: 'POST',
     headers: {
@@ -80,7 +81,7 @@ export async function* streamByok(
       const data = line.slice(6).trim()
       if (data === '[DONE]') return
       try {
-        const parsed = JSON.parse(data)
+        const parsed: any = JSON.parse(data)
         const delta = parsed.choices?.[0]?.delta?.content
         if (delta) yield delta
       } catch {

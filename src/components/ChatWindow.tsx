@@ -90,6 +90,9 @@ export function ChatWindow({ onOpenSettings }: Props) {
 
   const hasKey = !!loadByok()?.apiKey;
 
+  // old way of checking key was just checking localStorage directly
+  // const hasKey = !!localStorage.getItem('reposense.byok')
+
   return (
     <div className="flex flex-1 min-w-0 flex-col overflow-hidden bg-bg-canvas">
       <div ref={scrollRef} className="flex-1 overflow-y-auto overflow-x-hidden px-4 py-6">

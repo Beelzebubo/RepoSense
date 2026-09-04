@@ -21,8 +21,10 @@ export async function* ask(
   question: string,
   contextText: string,
 ): AsyncGenerator<string> {
+  console.log('[RepoSense] asking:', question)
   const byok = loadByok()
 
+  // was gonna try local llm fallback but havent gotten it working yet
   if (byok?.apiKey) {
     const systemPrompt = buildSystemPrompt(contextText)
     const messages = [
@@ -50,6 +52,7 @@ export async function retrieveForQuery(query: string): Promise<{
 }> {
   if (!engine) throw new Error('No repo loaded')
 
+  // TODO: maybe add caching for query embeddings? would speed up repeated questions
   if (engine.vectors.length === 0 || engine.dim === 0) {
     return { chunks: [], context: '' }
   }

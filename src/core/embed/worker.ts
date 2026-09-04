@@ -103,6 +103,7 @@ self.onmessage = async (e: MessageEvent) => {
   try {
     self.postMessage({ type: 'progress', progress: 5, message: 'Loading chunks…' })
     const chunks = await loadChunks(repoUrl)
+    console.log('[embed worker] loaded', chunks.length, 'chunks')
 
     if (chunks.length === 0) {
       self.postMessage({ type: 'error', message: 'No chunks found for this repo' })
@@ -118,6 +119,7 @@ self.onmessage = async (e: MessageEvent) => {
     self.postMessage({ type: 'progress', progress: 25, message: 'Generating embeddings…' })
 
     const dim = 384
+    // batch size of 16 seems to work ok, tried 32 but it was slow on weaker devices
     const batchSize = 16
     const allVecs: Float32Array[] = []
 
