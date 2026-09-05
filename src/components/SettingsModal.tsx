@@ -69,7 +69,7 @@ export function SettingsModal({ open, onClose }: Props) {
           <button
             onClick={handleSave}
             disabled={!key.trim()}
-            className="rounded-xl bg-accent px-5 py-2.5 text-body-sm font-medium text-text-inverse transition-all hover:bg-accent-dim disabled:cursor-not-allowed disabled:opacity-50"
+            className="rounded-lg bg-accent px-5 py-2.5 text-body-sm font-medium text-text-inverse transition-all hover:bg-accent-dim disabled:cursor-not-allowed disabled:opacity-50"
           >
             Save
           </button>

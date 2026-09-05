@@ -6,6 +6,7 @@ import { SettingsModal } from './components/SettingsModal';
 import { SakuraBackground } from './components/SakuraBackground';
 import { OnboardingOverlay } from './components/OnboardingOverlay';
 import { ThemeToggle } from './components/ThemeToggle';
+import { EmbeddingOverlay } from './components/EmbeddingOverlay';
 import { useAppState } from './core/state/store';
 
 export default function App() {
@@ -36,6 +37,7 @@ export default function App() {
       </div>
 
       <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
+      <EmbeddingOverlay />
     </div>
   );
 }

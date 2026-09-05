@@ -105,9 +105,9 @@ function embedInBackground(url: string) {
             dim: cached.dim,
           })
         }
+        setState({ ingestion: { stage: 'done', progress: 100 } })
+        worker.terminate()
       })
-      setState({ ingestion: { stage: 'done', progress: 100 } })
-      worker.terminate()
     } else if (type === 'error') {
       console.error('Embedding failed:', message)
       setState({ ingestion: { stage: 'done', progress: 100, message: 'Embedding skipped' } })

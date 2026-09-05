@@ -116,7 +116,7 @@ export function ChatWindow({ onOpenSettings }: Props) {
                   onClick={onOpenSettings}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="mt-4 rounded-full border border-border bg-bg-surface px-5 py-2 text-sm font-medium text-text-secondary shadow-sm transition-all hover:bg-bg-hover"
+                  className="mt-4 rounded-lg border border-border bg-bg-surface px-5 py-2 text-sm font-medium text-text-secondary shadow-sm transition-all hover:bg-bg-hover"
                 >
                   Set up API key to start chatting
                 </motion.button>
@@ -145,7 +145,7 @@ export function ChatWindow({ onOpenSettings }: Props) {
             disabled={!input.trim() || streaming}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="rounded-xl bg-accent px-5 py-3 text-body font-medium text-text-inverse shadow-sm transition-all hover:bg-accent-dim disabled:cursor-not-allowed disabled:opacity-50"
+            className="rounded-lg bg-accent px-5 py-3 text-body font-medium text-text-inverse shadow-sm transition-all hover:bg-accent-dim disabled:cursor-not-allowed disabled:opacity-50"
           >
             {streaming ? 'Thinking...' : 'Ask'}
           </motion.button>

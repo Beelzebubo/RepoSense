@@ -41,7 +41,7 @@ export function OnboardingOverlay({ onComplete }: Props) {
         </ul>
         <button
           onClick={dismiss}
-          className="w-full rounded-xl bg-accent px-5 py-2.5 text-body-sm font-medium text-text-inverse transition-colors hover:bg-accent-dim"
+          className="w-full rounded-lg bg-accent px-5 py-2.5 text-body-sm font-medium text-text-inverse transition-colors hover:bg-accent-dim"
         >
           Got it
         </button>

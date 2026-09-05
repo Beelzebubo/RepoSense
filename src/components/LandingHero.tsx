@@ -97,7 +97,7 @@ export function LandingHero({ onOpenSettings }: Props) {
               disabled={!url.trim() || loading}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="rounded-full bg-accent px-8 py-3 text-body font-medium text-text-inverse shadow-md transition-all hover:bg-accent-dim hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-lg bg-accent px-8 py-3 text-body font-medium text-text-inverse shadow-md transition-all hover:bg-accent-dim hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading ? 'Loading...' : 'Get Started'}
             </motion.button>
@@ -107,7 +107,7 @@ export function LandingHero({ onOpenSettings }: Props) {
               onClick={onOpenSettings}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="rounded-full border border-border bg-bg-surface px-6 py-3 text-body font-medium text-text-secondary shadow-sm transition-all hover:bg-bg-hover hover:text-text-primary"
+              className="rounded-lg border border-border bg-bg-surface px-6 py-3 text-body font-medium text-text-secondary shadow-sm transition-all hover:bg-bg-hover hover:text-text-primary"
             >
               Set up API key
             </motion.button>

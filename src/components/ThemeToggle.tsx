@@ -5,7 +5,8 @@ export function ThemeToggle() {
     if (typeof window === 'undefined') return false;
     const stored = localStorage.getItem('reposense.theme');
     if (stored) return stored === 'dark';
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    localStorage.setItem('reposense.theme', 'light');
+    return false;
   });
 
   useEffect(() => {
@@ -16,7 +17,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setDark(!dark)}
-      className="flex h-8 w-8 items-center justify-center rounded-full border border-border bg-bg-surface text-text-secondary transition-colors hover:bg-bg-hover hover:text-text-primary shadow-sm"
+      className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-bg-surface text-text-secondary transition-colors hover:bg-bg-hover hover:text-text-primary shadow-sm"
       title={dark ? 'Light mode' : 'Dark mode'}
     >
       {dark ? (
